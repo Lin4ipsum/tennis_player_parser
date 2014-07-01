@@ -5,7 +5,7 @@
 require_relative 'models/printer.rb'
 require 'date'
 
-namespace :linda_code_test do
+namespace :tennis_player_importer do
   desc "view all player output"
   task :view_all_player_output do
   Printer.instantiate_players("src/pipe_delimited.txt", "src/comma_delimited.txt", "src/space_delimited.txt")
