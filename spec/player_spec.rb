@@ -7,23 +7,23 @@ describe Player do
 		end
 
 		it "can get lastname" do
-			@player.last_name.should == "Simpson"
+			expect(@player.last_name).to eq("Simpson")
 		end
 		
 		it "can get first name" do
-			@player.first_name.should == "Homer"
+			expect(@player.first_name).to eq("Homer")
 		end
 
 		it "can get gender" do
-			@player.gender.should == "Male"
+			expect(@player.gender).to eq("Male")
 		end
 
 		it "can get dob" do
-			@player.date_of_birth.should == "5/13/77"
+			expect(@player.date_of_birth).to eq("5/13/77")
 		end
 
 		it "can get favorite color" do
-			@player.favorite_color.should == "Brown"
+			expect(@player.favorite_color).to eq("Brown")
 		end
 	end
 end
