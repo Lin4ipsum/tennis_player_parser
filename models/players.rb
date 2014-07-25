@@ -1,6 +1,5 @@
 require_relative 'players.rb'
 require_relative 'player_builder.rb'
-require 'date'
 
 class Players
   def self.sort_by_gender_and_lastname_ascending(players)
