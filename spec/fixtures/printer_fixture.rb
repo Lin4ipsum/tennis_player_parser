@@ -46,7 +46,7 @@ EOS
   end
 
   def self.all_expected_outputs
-    puts expected_output_one + expected_output_two + expected_output_three
+    expected_output_one + "\n" + expected_output_two + "\n" + expected_output_three
   end
 
   def self.expected_player_attributes
@@ -62,5 +62,4 @@ Hingis Martina Female 04/02/1979 Green
 Seles Monica Female 12/02/1973 Black
 EOS
   end
-
 end
