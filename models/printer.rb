@@ -1,55 +1,34 @@
-require_relative 'importer.rb'
 require_relative 'player.rb'
-require_relative 'sorter.rb'
+require_relative 'player_builder.rb'
+require_relative 'players'
 require 'rake'
 require 'pp'
 
 class Printer
-
-  def print_output_one
-    sorted_players = players.sort_by(gender, lastname, asc).to_s
-    puts "Output 1:"
-    puts sorted_players
+  def self.print_output_one(players)
+    sorted_players = Players.sort_by_gender_and_lastname_ascending(players)
+    "Output 1:\n" + self.print_player_attributes(sorted_players)
   end
 
-  def print_output_two
-    print output_header("Output 2")
-    sorted_players = instantiate_sorter.sort_oldest_to_youngest(instantiate_players)
-    print_player_attributes(sorted_players)
+  def self.print_output_two(players)
+    sorted_players = Players.sort_oldest_to_youngest(players)
+    "Output 2:\n" + self.print_player_attributes(sorted_players)
   end
 
-  def print_output_three
-    print output_header("Output 3")
-    sorted_players = instantiate_sorter.sort_by_lastname_descending(instantiate_players)
-    print_player_attributes(sorted_players)
+  def self.print_output_three(players)
+    sorted_players = Players.sort_by_lastname_descending(players)
+    "Output 3:\n" + self.print_player_attributes(sorted_players)
   end
 
-  def print_all_outputs
-    self.print_output_one
-    puts "\n"
-    self.print_output_two
-    puts "\n"
-    self.print_output_three
-    puts "\n"
-    ""
+  def self.print_all_outputs(players)
+    self.print_output_one(players) + "\n" + self.print_output_two(players) + "\n" + self.print_output_three(players)
   end
 
-  # def output_header(string)
-  #   string + ": \n"
-  # end
-
-  def print_player_attributes(players)
+  def self.print_player_attributes(players)
+    sorted_players = ""
     players.each do |x|
-      puts "#{x.lastname} #{x.firstname} #{x.gender}"
-       # + " " + x.dateofbirth + " " + x.favoritecolor
+       sorted_players += "#{x.last_name} #{x.first_name} #{x.gender} #{x.date_of_birth.strftime('%m/%d/%Y')} #{x.favorite_color}\n"
     end
+    sorted_players
   end
-
-  def instantiate_players
-    Importer.new.import_all_players 
-  end
-
-  # def instantiate_sorter
-  #   Sorter.new
-  # end
 end
