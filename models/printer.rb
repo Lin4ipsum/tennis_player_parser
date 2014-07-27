@@ -1,22 +1,22 @@
 require_relative 'player.rb'
-require_relative 'player_builder.rb'
-require_relative 'players'
+require_relative 'players_builder.rb'
+require_relative 'players_sorter.rb'
 require 'rake'
 require 'pp'
 
 class Printer
   def self.print_output_one(players)
-    sorted_players = Players.sort_by_gender_and_lastname_ascending(players)
+    sorted_players = PlayersSorter.sort_by_gender_and_lastname_ascending(players)
     "Output 1:\n" + self.print_player_attributes(sorted_players)
   end
 
   def self.print_output_two(players)
-    sorted_players = Players.sort_oldest_to_youngest(players)
+    sorted_players = PlayersSorter.sort_oldest_to_youngest(players)
     "Output 2:\n" + self.print_player_attributes(sorted_players)
   end
 
   def self.print_output_three(players)
-    sorted_players = Players.sort_by_lastname_descending(players)
+    sorted_players = PlayersSorter.sort_by_lastname_descending(players)
     "Output 3:\n" + self.print_player_attributes(sorted_players)
   end
 

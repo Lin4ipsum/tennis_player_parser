@@ -1,7 +1,6 @@
-require_relative 'players.rb'
-require_relative 'player_builder.rb'
+require_relative 'players_builder.rb'
 
-class Players
+class PlayersSorter
   def self.sort_by_gender_and_lastname_ascending(players)
     players.sort_by {|player| [player.gender, player.last_name] }
   end
