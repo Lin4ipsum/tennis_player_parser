@@ -3,9 +3,9 @@ class PlayerDataNormalizer
 	attr_accessor :delimiter, :player_data
 
 	ORDER_CONFIG = {
-    "|"  => [0, 1, 3, 5, 4], 
-    "," => [0, 1, 2, 4, 3],
-    " " => [0, 1, 3, 4, 5]
+    "|"  => {last_name: 0, first_name: 1, gender: 3, date_of_birth: 5, favorite_color: 4}, 
+    "," => {last_name: 0, first_name: 1, gender: 2, date_of_birth: 4, favorite_color: 3},
+    " " => {last_name: 0, first_name: 1, gender: 3, date_of_birth: 4, favorite_color: 5}
   }
 
 	def determine_delimiter(data)
@@ -19,32 +19,30 @@ class PlayerDataNormalizer
 		end
 	end
 
-	def strip_data(data)
+	def tokenize(data)
 		remove_delimiter = ["|", ","].include?(self.delimiter) ? data.gsub(self.delimiter, "") : data
 		remove_delimiter.split("\n")
 	end
 
-	def build_player_data(stripped_data, config)
-		player_data = []
-		stripped_data.each do |data|
-			player_data << order_data(data, config)
+	def build_player_hashes(stripped_data)
+		stripped_data.map do |data|
+			build_player_hash(data)
 		end
-		self.player_data = player_data
 	end
 
-	def order_data(data, config)
+	def build_player_hash(data)
 		data_array = data.split(" ")
-		order = ORDER_CONFIG[self.delimiter]
-		players = []
-		order.each do |x|
-			players << data_array[x]
+		ordered_data = {}
+		
+		config = ORDER_CONFIG[self.delimiter]
+		config.keys.each do |key|
+			ordered_data[key] = data_array[config[key]]
 		end
-		players
+		ordered_data
 	end
 
 	def normalize_data(data)
 		self.determine_delimiter(data)
-		self.build_player_data(self.strip_data(data), self.delimiter)
+		self.build_player_hashes(self.tokenize(data))
 	end
 end
-

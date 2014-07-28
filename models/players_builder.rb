@@ -9,6 +9,7 @@ class PlayersBuilder
     @all_players = []
   end
 
+#look into map
   def build_players(data)
     data.each do |player_data|
       @all_players << build_player(player_data)
@@ -18,13 +19,15 @@ class PlayersBuilder
 
   def build_player(player_data)
     Player.new(
-      player_data[0],
-      player_data[1],
-      format_gender(player_data[2]),
-      format_dob(player_data[3]),
-      player_data[4]
+      player_data[:last_name],
+      player_data[:first_name],
+      format_gender(player_data[:gender]),
+      format_dob(player_data[:date_of_birth]),
+      player_data[:favorite_color]
      )
   end
+
+#move into palyer data normalizer
 
   def format_dob(date_of_birth)
     parsed = date_of_birth.include?('/') ? date_of_birth.split('/') : date_of_birth.split('-')

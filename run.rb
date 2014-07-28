@@ -19,6 +19,7 @@ module Run
 		players_builder.build_players(comma_normalized)
 		players_builder.build_players(space_normalized)
 		players_builder.build_players(pipe_normalized)
+		#build array
 		players = players_builder.all_players
 
 		puts Printer.print_all_outputs(players)	

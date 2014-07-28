@@ -26,54 +26,53 @@ describe PlayerDataNormalizer do
 		end
 	end
 
-	context "#strip_data" do
+	context "#tokenize" do
 		it "should return an array" do
 			data = "Smith | Steve | D | M | Red | 3-3-1985\nBonk | Radek | S | M | Green | 6-3-1975\nBouillon | Francis | G | M | Blue | 6-3-1975"
 			@p.determine_delimiter(data)
-			expect(@p.strip_data(data).class).to eq(Array)
+			expect(@p.tokenize(data).class).to eq(Array)
 		end
 
 		it "should remove the delimiter" do
 			data = "Smith | Steve | D | M | Red | 3-3-1985\nBonk | Radek | S | M | Green | 6-3-1975\nBouillon | Francis | G | M | Blue | 6-3-1975"
 			@p.determine_delimiter(data)
-			expect(@p.strip_data(data).include?("|")).to eq(false)
+			expect(@p.tokenize(data).include?("|")).to eq(false)
 		end
 
 		it "should not remove the delimiter for a space delimiter" do
 			data = "Kournikova Anna F F 6-3-1975 Red\nHingis Martina M F 4-2-1979 Green\nSeles Monica H F 12-2-1973 Black"
 			@p.determine_delimiter(data)
-			expect(@p.strip_data(data)).to eq(["Kournikova Anna F F 6-3-1975 Red", "Hingis Martina M F 4-2-1979 Green", "Seles Monica H F 12-2-1973 Black"])
+			expect(@p.tokenize(data)).to eq(["Kournikova Anna F F 6-3-1975 Red", "Hingis Martina M F 4-2-1979 Green", "Seles Monica H F 12-2-1973 Black"])
 		end
 	end
 
-	context "#order_data" do
+	context "#build_player_hash" do
 		it "returns an array" do
 			data = "Abercrombie, Neil, Male, Tan, 2/13/1943\nBishop, Timothy, Male, Yellow, 4/23/1967\nKelly, Sue, Female, Pink, 7/12/1959"
 			@p.determine_delimiter(data)
-			player_data = @p.strip_data(data).first
-			expect(@p.order_data(player_data, @p.delimiter).class).to eq(Array)
+			player_data = @p.tokenize(data).first
+			expect(@p.build_player_hash(player_data).class).to eq(Hash)
 		end
 		
 		it "should return player data" do
 			data = "Smith | Steve | D | M | Red | 3-3-1985\nBonk | Radek | S | M | Green | 6-3-1975\nBouillon | Francis | G | M | Blue | 6-3-1975"
 			@p.determine_delimiter(data)
-			player_data = @p.strip_data(data).first
-			expect(@p.order_data(player_data, @p.delimiter)).to eq(["Smith", "Steve", "M", "3-3-1985", "Red"])
+			player_data = @p.tokenize(data).first
+			expect(@p.build_player_hash(player_data)).to eq({:last_name=>"Smith", :first_name=>"Steve", :gender=>"M", :date_of_birth=>"3-3-1985", :favorite_color=>"Red"})
 		end
-	end
+	 end
 
-	context "#build_player_data" do
+	context "#build_player_hashes#" do
 		it "should return an array" do
 			data = "Kournikova Anna F F 6-3-1975 Red\nHingis Martina M F 4-2-1979 Green\nSeles Monica H F 12-2-1973 Black"
 			@p.determine_delimiter(data)
-			expect(@p.build_player_data(@p.strip_data(data), @p.delimiter).class).to eq(Array)
+			expect(@p.build_player_hashes(@p.tokenize(data)).class).to eq(Array)
 		end
 
 		it "should return ordered players attributes array" do
 			data = "Smith | Steve | D | M | Red | 3-3-1985\nBonk | Radek | S | M | Green | 6-3-1975\nBouillon | Francis | G | M | Blue | 6-3-1975"
 			@p.determine_delimiter(data)
-			expect(@p.build_player_data(@p.strip_data(data), @p.delimiter).first.class).to eq(Array)
-			expect(@p.build_player_data(@p.strip_data(data), @p.delimiter).first).to eq(["Smith", "Steve", "M", "3-3-1985", "Red"])
+			expect(@p.build_player_hashes(@p.tokenize(data)).first).to eq({:last_name=>"Smith", :first_name=>"Steve", :gender=>"M", :date_of_birth=>"3-3-1985", :favorite_color=>"Red"})
 		end
 	end
 
@@ -81,6 +80,9 @@ describe PlayerDataNormalizer do
 		it "should return an array" do
 			data = "Smith | Steve | D | M | Red | 3-3-1985\nBonk | Radek | S | M | Green | 6-3-1975\nBouillon | Francis | G | M | Blue | 6-3-1975"
 			expect(@p.normalize_data(data).class).to eq(Array)
+			data = "Abercrombie, Neil, Male, Tan, 2/13/1943\nBishop, Timothy, Male, Yellow, 4/23/1967\nKelly, Sue, Female, Pink, 7/12/1959"
+
+			puts @p.normalize_data(data).inspect
 		end
 	end
 end 

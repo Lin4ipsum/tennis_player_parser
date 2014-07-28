@@ -16,7 +16,7 @@ describe PlayersBuilder do
 
   context "#build_player" do
     before do
-      @data = ["Smith", "Steve", "M", "3-3-1985", "Red"]
+      @data = {:last_name=>"Smith", :first_name=>"Steve", :gender=>"M", :date_of_birth=>"3-3-1985", :favorite_color=>"Red"}
     end
 
     it "should build a player" do
@@ -32,7 +32,7 @@ describe PlayersBuilder do
 
   context "#build_players" do
     before do
-      @data = [["Smith", "Steve", "M", "3-3-1985", "Red"], ["Bonk", "Radek", "M", "6-3-1975", "Green"], ["Bouillon", "Francis", "M", "6-3-1975", "Blue"]]
+      @data = [{:last_name=>"Kournikova", :first_name=>"Anna", :gender=>"F", :date_of_birth=>"6-3-1975", :favorite_color=>"Red"}, {:last_name=>"Hingis", :first_name=>"Martina", :gender=>"F", :date_of_birth=>"4-2-1979", :favorite_color=>"Green"}, {:last_name=>"Seles", :first_name=>"Monica", :gender=>"F", :date_of_birth=>"12-2-1973", :favorite_color=>"Black"}]
     end
     
     it "should return an array" do
@@ -45,8 +45,6 @@ describe PlayersBuilder do
 
     it "should build multiple players" do
       @p.build_players(@data)
-      data = [["Abercrombie", "Neil", "Male", "2/13/1943", "Tan"], ["Bishop", "Timothy", "Male", "4/23/1967", "Yellow"], ["Kelly", "Sue", "Female", "7/12/1959", "Pink"]]
-      @p.build_players(data)
       expect(@p.all_players.class).to eq(Array)
       expect(@p.all_players.first.class).to eq(Player)
     end
@@ -61,14 +59,14 @@ describe PlayersBuilder do
 
   context "format_gender" do
     it "should return Male" do
-      @data = ["Smith", "Steve", "M", "3-3-1985", "Red"]
-      player = @p.build_player(@data)
+      data = {:last_name=>"Smith", :first_name=>"Steve", :gender=>"M", :date_of_birth=>"3-3-1985", :favorite_color=>"Red"}
+      player = @p.build_player(data)
       expect(player.gender).to eq("Male")
     end
 
     it "should return Female" do
-      @data = ["Kelly", "Sue", "Female", "7/12/1959", "Pink"]
-      player = @p.build_player(@data)
+      data = {:last_name=>"Kournikova", :first_name=>"Anna", :gender=>"F", :date_of_birth=>"6-3-1975", :favorite_color=>"Red"}
+      player = @p.build_player(data)
       expect(player.gender).to eq("Female")
     end
   end
