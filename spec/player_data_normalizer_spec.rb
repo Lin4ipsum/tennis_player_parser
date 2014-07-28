@@ -81,8 +81,6 @@ describe PlayerDataNormalizer do
 			data = "Smith | Steve | D | M | Red | 3-3-1985\nBonk | Radek | S | M | Green | 6-3-1975\nBouillon | Francis | G | M | Blue | 6-3-1975"
 			expect(@p.normalize_data(data).class).to eq(Array)
 			data = "Abercrombie, Neil, Male, Tan, 2/13/1943\nBishop, Timothy, Male, Yellow, 4/23/1967\nKelly, Sue, Female, Pink, 7/12/1959"
-
-			puts @p.normalize_data(data).inspect
 		end
 	end
 end 

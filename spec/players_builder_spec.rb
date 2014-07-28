@@ -5,15 +5,6 @@ describe PlayersBuilder do
     @p = PlayersBuilder.new
   end
 
-  it "should set @all_players to an empty array on initialization" do
-    expect(@p.all_players).to eq([])
-  end
-
-  it "should be able to get and set all players" do
-    @p.all_players.push("Homer Simpson")
-    expect(@p.all_players).to eq(["Homer Simpson"])
-  end
-
   context "#build_player" do
     before do
       @data = {:last_name=>"Smith", :first_name=>"Steve", :gender=>"M", :date_of_birth=>"3-3-1985", :favorite_color=>"Red"}
@@ -44,9 +35,9 @@ describe PlayersBuilder do
     end
 
     it "should build multiple players" do
-      @p.build_players(@data)
-      expect(@p.all_players.class).to eq(Array)
-      expect(@p.all_players.first.class).to eq(Player)
+      players = @p.build_players(@data)
+      expect(players.class).to eq(Array)
+      expect(players.first.class).to eq(Player)
     end
   end
 

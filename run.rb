@@ -15,16 +15,12 @@ module Run
 		pipe_normalized = pdn.normalize_data(import_pipe)
 		space_normalized = pdn.normalize_data(import_space)
 
-# variables to match the rest of the API
-# players = 
-# players +=
 		players_builder = PlayersBuilder.new
 		comma_players = players_builder.build_players(comma_normalized)
 		space_players = players_builder.build_players(space_normalized)
 		pipe_players = players_builder.build_players(pipe_normalized)
 		players = comma_players + space_players + pipe_players
 
-# put puts in printer method
 		puts Printer.print_all_outputs(players)	
 	end
 end

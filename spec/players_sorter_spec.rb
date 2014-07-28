@@ -7,10 +7,10 @@ describe PlayersSorter do
     data2 = [{:last_name=>"Abercrombie", :first_name=>"Neil", :gender=>"Male", :date_of_birth=>"2/13/1943", :favorite_color=>"Tan"}, {:last_name=>"Bishop", :first_name=>"Timothy", :gender=>"Male", :date_of_birth=>"4/23/1967", :favorite_color=>"Yellow"}, {:last_name=>"Kelly", :first_name=>"Sue", :gender=>"Female", :date_of_birth=>"7/12/1959", :favorite_color=>"Pink"}]
     data3 = [{:last_name=>"Kournikova", :first_name=>"Anna", :gender=>"F", :date_of_birth=>"6-3-1975", :favorite_color=>"Red"}, {:last_name=>"Hingis", :first_name=>"Martina", :gender=>"F", :date_of_birth=>"4-2-1979", :favorite_color=>"Green"}, {:last_name=>"Seles", :first_name=>"Monica", :gender=>"F", :date_of_birth=>"12-2-1973", :favorite_color=>"Black"}]
     p = PlayersBuilder.new
-    p.build_players(data1)
-    p.build_players(data2)
-    p.build_players(data3)
-    @players = p.all_players
+    players_one = p.build_players(data1)
+    players_two = p.build_players(data2)
+    players_three = p.build_players(data3)
+    @players = players_one + players_two + players_three
   end
 
   context "#self.sort_by_gender_and_lastname_ascending" do

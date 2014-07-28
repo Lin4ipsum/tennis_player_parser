@@ -3,7 +3,6 @@ require 'date'
 
 class PlayersBuilder
   
-#look into map
   def build_players(data)
     players = []
     data.each do |player_data|
@@ -21,8 +20,6 @@ class PlayersBuilder
       player_data[:favorite_color]
      )
   end
-
-#move into palyer data normalizer
 
   def format_dob(date_of_birth)
     parsed = date_of_birth.include?('/') ? date_of_birth.split('/') : date_of_birth.split('-')

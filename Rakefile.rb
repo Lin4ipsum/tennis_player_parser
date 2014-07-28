@@ -1,8 +1,11 @@
 require_relative 'run.rb'
 
-namespace :tennis_player_importer do
   desc "view all player output"
-  task :view_all_player_output do
+  task :run do
   	Run.print_sorted_tennis_players
   end
-end
+
+  desc "run all tests with rspec"
+  task :tests do
+  	bundle exec rspec spec
+  end

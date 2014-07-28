@@ -3,9 +3,9 @@ require_relative "../models/importer.rb"
 describe Importer do
 	before do
 		@i = Importer.new
-		@pipe = "../data/pipe_delimited.txt"
-		@comma = "../data/comma_delimited.txt"
-		@space = "../data/space_delimited.txt"
+		@pipe = "data/pipe_delimited.txt"
+		@comma = "data/comma_delimited.txt"
+		@space = "data/space_delimited.txt"
 	end
 
 	context "#import_file" do

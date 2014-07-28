@@ -21,7 +21,7 @@ class Printer
   end
 
   def self.print_all_outputs(players)
-    self.print_output_one(players) + "\n" + self.print_output_two(players) + "\n" + self.print_output_three(players)
+    puts self.print_output_one(players) + "\n" + self.print_output_two(players) + "\n" + self.print_output_three(players)
   end
 
   def self.print_player_attributes(players)
