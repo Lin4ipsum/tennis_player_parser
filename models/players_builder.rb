@@ -3,18 +3,13 @@ require 'date'
 
 class PlayersBuilder
   
-  attr_accessor :all_players
-
-  def initialize
-    @all_players = []
-  end
-
 #look into map
   def build_players(data)
+    players = []
     data.each do |player_data|
-      @all_players << build_player(player_data)
+      players << build_player(player_data)
     end
-    @all_players
+    players
   end
 
   def build_player(player_data)

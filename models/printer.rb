@@ -4,8 +4,6 @@ require_relative 'players_sorter.rb'
 require 'rake'
 require 'pp'
 
-#uchange sorted_players name to be more semantic
-
 class Printer
   def self.print_output_one(players)
     gender_and_last_name = PlayersSorter.sort_by_gender_and_lastname_ascending(players)
