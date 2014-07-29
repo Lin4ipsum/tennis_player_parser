@@ -16,7 +16,6 @@ Output 1 – sorted by gender (females before males) then by last name ascending
 Output 2 – sorted by birth date, ascending.
 Output 3 – sorted by last name, descending.
 
-
 // EXAMPLE OUTPUT;
 This is an example of Desired Outcome: 
 
