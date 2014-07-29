@@ -51,15 +51,17 @@ describe PlayerDataNormalizer do
 		it "returns an array" do
 			data = "Abercrombie, Neil, Male, Tan, 2/13/1943\nBishop, Timothy, Male, Yellow, 4/23/1967\nKelly, Sue, Female, Pink, 7/12/1959"
 			@p.determine_delimiter(data)
-			player_data = @p.tokenize(data).first
-			expect(@p.build_player_hash(player_data).class).to eq(Hash)
+			strip_data = @p.remove_delimiter(data)
+			data_array = @p.arrayify(strip_data).first
+			expect(@p.build_player_hash(data_array).class).to eq(Hash)
 		end
 		
 		it "should return player data" do
 			data = "Smith | Steve | D | M | Red | 3-3-1985\nBonk | Radek | S | M | Green | 6-3-1975\nBouillon | Francis | G | M | Blue | 6-3-1975"
 			@p.determine_delimiter(data)
-			player_data = @p.tokenize(data).first
-			expect(@p.build_player_hash(player_data)).to eq({:last_name=>"Smith", :first_name=>"Steve", :gender=>"M", :date_of_birth=>"3-3-1985", :favorite_color=>"Red"})
+			strip_data = @p.remove_delimiter(data)
+			data_array = @p.arrayify(strip_data).first
+			expect(@p.build_player_hash(data_array)).to eq({:last_name=>"Smith", :first_name=>"Steve", :gender=>"M", :date_of_birth=>"3-3-1985", :favorite_color=>"Red"})
 		end
 	 end
 
@@ -67,13 +69,17 @@ describe PlayerDataNormalizer do
 		it "should return an array" do
 			data = "Kournikova Anna F F 6-3-1975 Red\nHingis Martina M F 4-2-1979 Green\nSeles Monica H F 12-2-1973 Black"
 			@p.determine_delimiter(data)
-			expect(@p.build_player_hashes(@p.tokenize(data)).class).to eq(Array)
+			strip_data = @p.remove_delimiter(data)
+			data_array = @p.arrayify(strip_data)
+			expect(@p.build_player_hashes(data_array).class).to eq(Array)
 		end
 
 		it "should return ordered players attributes array" do
 			data = "Smith | Steve | D | M | Red | 3-3-1985\nBonk | Radek | S | M | Green | 6-3-1975\nBouillon | Francis | G | M | Blue | 6-3-1975"
 			@p.determine_delimiter(data)
-			expect(@p.build_player_hashes(@p.tokenize(data)).first).to eq({:last_name=>"Smith", :first_name=>"Steve", :gender=>"M", :date_of_birth=>"3-3-1985", :favorite_color=>"Red"})
+			strip_data = @p.remove_delimiter(data)
+			data_array = @p.arrayify(strip_data)
+			expect(@p.build_player_hashes(data_array).first).to eq({:last_name=>"Smith", :first_name=>"Steve", :gender=>"M", :date_of_birth=>"3-3-1985", :favorite_color=>"Red"})
 		end
 	end
 

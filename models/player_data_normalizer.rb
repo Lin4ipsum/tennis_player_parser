@@ -18,7 +18,6 @@ class PlayerDataNormalizer
 			@delimiter = " "
 		end
 	end
-# break this up into two methods
 	
 	def remove_delimiter(string)
 		["|", ","].include?(@delimiter) ? string.gsub(@delimiter, "") : string
@@ -26,12 +25,6 @@ class PlayerDataNormalizer
 
 	def arrayify(string)
 		string.split("\n")
-	end
-
-	def tokenize(data)
-		stripped_data = ["|", ","].include?(@delimiter) ? data.gsub(@delimiter, "") : data
-
-		stripped_data.split("\n")
 	end
 
 	def build_player_hashes(tokenized_data)
