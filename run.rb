@@ -24,5 +24,3 @@ module Run
 		puts Printer.print_all_outputs(players)	
 	end
 end
-
-# rake test, rake run, bundle install
