@@ -1,13 +1,14 @@
 README:
 
-
 // WHAT IT DOES:
 This is a ruby program that makes a single set of tennis player records by parsing data from 3 different record files. A tennis player record consists of a last name, first name, gender, data of birth, and favorite color. 
 
-
 // HOW TO RUN IT:
-
-
+1. cd to tennis_player_importer
+2. bundle install
+3. type 'rake run' in terminal to see tennis player output
+4. type 'rake tests' in terminal to view all tests
+note: rake -T (command to list all of the rake tasks)
 
 // HOW IT WORKS:
 The data from these 3 files has been parsed and aggregated into the following 3 outputs:

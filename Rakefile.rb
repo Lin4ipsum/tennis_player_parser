@@ -1,3 +1,4 @@
+require 'rspec/core/rake_task'
 require_relative 'run.rb'
 
   desc "view all player output"
@@ -7,5 +8,6 @@ require_relative 'run.rb'
 
   desc "run all tests with rspec"
   task :tests do
-  	bundle exec rspec spec
+  	RSpec::Core::RakeTask.new(:spec)
+  	Rake::Task["spec"].execute
   end
