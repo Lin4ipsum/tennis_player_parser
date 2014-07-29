@@ -26,23 +26,24 @@ describe PlayerDataNormalizer do
 		end
 	end
 
-	context "#tokenize" do
-		it "should return an array" do
-			data = "Smith | Steve | D | M | Red | 3-3-1985\nBonk | Radek | S | M | Green | 6-3-1975\nBouillon | Francis | G | M | Blue | 6-3-1975"
-			@p.determine_delimiter(data)
-			expect(@p.tokenize(data).class).to eq(Array)
-		end
-
+	context "#remove_delimiter" do
 		it "should remove the delimiter" do
 			data = "Smith | Steve | D | M | Red | 3-3-1985\nBonk | Radek | S | M | Green | 6-3-1975\nBouillon | Francis | G | M | Blue | 6-3-1975"
 			@p.determine_delimiter(data)
-			expect(@p.tokenize(data).include?("|")).to eq(false)
+			expect(@p.remove_delimiter(data).include?("|")).to eq(false)
 		end
 
 		it "should not remove the delimiter for a space delimiter" do
 			data = "Kournikova Anna F F 6-3-1975 Red\nHingis Martina M F 4-2-1979 Green\nSeles Monica H F 12-2-1973 Black"
 			@p.determine_delimiter(data)
-			expect(@p.tokenize(data)).to eq(["Kournikova Anna F F 6-3-1975 Red", "Hingis Martina M F 4-2-1979 Green", "Seles Monica H F 12-2-1973 Black"])
+			expect(@p.remove_delimiter(data)).to eq("Kournikova Anna F F 6-3-1975 Red\nHingis Martina M F 4-2-1979 Green\nSeles Monica H F 12-2-1973 Black")
+		end
+	end
+
+	context "#arrayify" do
+		it "turns a string into an array" do
+			string = "Smith  Steve  D  M  Red  3-3-1985\nBonk  Radek  S  M  Green  6-3-1975\nBouillon  Francis  G  M  Blue  6-3-1975"
+			expect(@p.arrayify(string)).to eq(["Smith  Steve  D  M  Red  3-3-1985", "Bonk  Radek  S  M  Green  6-3-1975", "Bouillon  Francis  G  M  Blue  6-3-1975"])
 		end
 	end
 
@@ -80,7 +81,6 @@ describe PlayerDataNormalizer do
 		it "should return an array" do
 			data = "Smith | Steve | D | M | Red | 3-3-1985\nBonk | Radek | S | M | Green | 6-3-1975\nBouillon | Francis | G | M | Blue | 6-3-1975"
 			expect(@p.normalize_data(data).class).to eq(Array)
-			data = "Abercrombie, Neil, Male, Tan, 2/13/1943\nBishop, Timothy, Male, Yellow, 4/23/1967\nKelly, Sue, Female, Pink, 7/12/1959"
 		end
 	end
 end 
