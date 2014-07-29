@@ -8,8 +8,8 @@ class PlayerDataNormalizer
     " " => {last_name: 0, first_name: 1, gender: 3, date_of_birth: 4, favorite_color: 5}
   }
 
-	def determine_delimiter(data)
-		case data
+	def determine_delimiter(string)
+		case string
 		when /\|/
 			@delimiter = "|"
 		when /\,/
@@ -42,9 +42,9 @@ class PlayerDataNormalizer
 		end
 	end
 
-	def normalize_data(data)
-		determine_delimiter(data)
-		stripped_data = remove_delimiter(data)
+	def normalize_data(string)
+		determine_delimiter(string)
+		stripped_data = remove_delimiter(string)
 		data_array = arrayify(stripped_data)
 		build_player_hashes(data_array)
 	end
